@@ -30,6 +30,8 @@ import org.elasticsearch.index.query.TermQueryBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.fetch.subphase.FetchSourceContext;
+import org.elasticsearch.search.sort.SortBuilders;
+import org.elasticsearch.search.sort.SortOrder;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -182,9 +184,15 @@ class EsTests {
 			SearchRequest searchRequest = new SearchRequest(INDEX_NAME);
 			SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
 
-			TermQueryBuilder termQueryBuilder = QueryBuilders.termQuery("name", "acmday海洋北极燕鸥1");
+			TermQueryBuilder termQueryBuilder = QueryBuilders.termQuery("name", "acmday海洋北极燕鸥2");
 			sourceBuilder.query(termQueryBuilder);
 			sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
+
+
+//			sourceBuilder.trackScores(true)
+//					.sort(SortBuilders.fieldSort("_score").order(SortOrder.DESC))
+//					.sort(SortBuilders.fieldSort("timestamp").order(SortOrder.ASC).unmappedType("date"));
+
 
 			searchRequest.source(sourceBuilder);
 			SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);
