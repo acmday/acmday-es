@@ -7,6 +7,11 @@
 - 分词器版本：elasticsearch-analysis-ik-7.0.0
 - kibana版本：kibana-7.0.0-linux-x86_64
 
+## 参考文档
+- [Java High Level REST Client 使用文档](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/7.0/java-rest-high-getting-started.html)
+- [elasticsearch-head](https://github.com/mobz/elasticsearch-head.git)
+- [ES下载链接](https://www.elastic.co/cn/downloads/elasticsearch)
+
 ## DDL
 ```sql
 CREATE TABLE `student` (
@@ -100,9 +105,16 @@ http.port: 9200
 #cluster.initial_master_nodes: ["node-1", "node-2"]
 #
 # For more information, consult the discovery and cluster formation module documentation.
+
+# 跨域
 http.cors.enabled: true
 http.cors.allow-origin: "*"
+
+# 这个属性表示节点是否具有成为主节点的资格，注意：此属性的值为true，并不意味着这个节点就是主节点。
+# 因为真正的主节点，是由多个具有主节点资格的节点进行选举产生的。所以，这个属性只是代表这个节点是不是具有主节点选举资格。
 node.master: true
+
+# 这个属性表示节点是否存储数据。
 node.data: true	
 #
 # ---------------------------------- Gateway -----------------------------------
